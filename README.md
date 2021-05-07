@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# Grid Gallery is a react app which includes:
+1. Images from an API.
+2. Search for the images.
+3. Fully responsive layout.
+4. Infinite Scroll.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
