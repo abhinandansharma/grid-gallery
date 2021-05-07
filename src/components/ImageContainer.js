@@ -1,8 +1,6 @@
 import React from 'react';
 import NotFound from './NotFound';
 import Image from './images';
-// import InfiniteScroll from 'react-infinite-scroll-component';
-// import ImageSlideshow from 'material-ui/svg-icons/image/slideshow';
 
 //PhotoContainer will recieve it's data from App.js via props
 const ImageContainer = props => {

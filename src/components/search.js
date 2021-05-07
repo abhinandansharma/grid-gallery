@@ -36,6 +36,11 @@ export default class Search extends Component {
         let checkquery = (this.query.value);
         console.log('You typed "' + checkquery + '" in the Search field');
         this.performSearch(checkquery);
+        //trying to change url on search.
+        // let url = new URL('https://grid-gallery.vercel.app/');
+        // let params = new URLSearchParams(url.search.slice(1));
+
+        // params.append(checkquery, checkquery.length);
     }
 
     // React component lifecycle method to fetch data immediately
