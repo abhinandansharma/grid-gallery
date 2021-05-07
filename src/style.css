@@ -1,0 +1,43 @@
+#gallery {
+  column-count: 3;
+  column-gap: 1.5rem;
+  width: 70vw;
+  margin: auto;
+  margin-top: 15px;
+}
+  img {
+    width: 100%;
+    height: auto;
+    margin: .5rem;
+    max-width: 434px;
+    cursor: zoom-in;
+  }
+    img:hover {
+      filter: brightness(0.7)
+    }
+
+.search {
+  width: 100%;
+  background-color: #dbdbdb;
+  margin: 0 4px;
+  text-align: left;
+  border-radius: 25px;
+  padding: 10px;
+  border: none;
+}
+.searchInput {
+  background-color: #dbdbdb;
+  border: none;
+  color: black;
+  font-size: 16px;
+  width: 70%;
+  margin-left: 10px;
+  box-sizing: border-box;
+}
+.searchIcon {
+  margin-left: 10px;
+  margin-bottom: 6px;
+}
+searchIcon:focus {
+  border: none;
+}
