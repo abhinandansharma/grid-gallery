@@ -1,4 +1,4 @@
-#gallery {
+.gallery {
   column-count: 3;
   column-gap: 1.5rem;
   width: 70vw;
@@ -24,6 +24,7 @@
   border-radius: 25px;
   padding: 10px;
   border: none;
+  box-sizing: border-box;
 }
 .searchInput {
   background-color: #dbdbdb;
@@ -33,11 +34,12 @@
   width: 70%;
   margin-left: 10px;
   box-sizing: border-box;
+  outline: none;
 }
 .searchIcon {
   margin-left: 10px;
   margin-bottom: 6px;
 }
-searchIcon:focus {
+.searchIcon:focus {
   border: none;
 }

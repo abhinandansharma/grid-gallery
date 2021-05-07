@@ -1,5 +1,5 @@
-import GridGallery from './components/GridGallery.js';
-import './style.css';
+import GridGallery from './GridGallery.js'
+import '../style.css';
 
 function App() {
   return (

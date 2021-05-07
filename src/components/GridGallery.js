@@ -1,51 +1,77 @@
-import { useEffect } from 'react';
-import '../style.css';
+// Container component that takes in a keyword and api key as props
+// and fetches the photos and other required information from the API
+import React, { Component } from 'react';
 
-const loadJSON = async (fname) => {
-    var response = await fetch(fname);
-    var j = await response.json();
-    for (let imageObj of j.photos.photo) {
-        let img = document.createElement("img");
-        img.src = `https://farm${imageObj.farm}.staticflickr.com/${imageObj.server}/${imageObj.id}_${imageObj.secret}.jpg`;
-        document.getElementById("gallery").append(img);
+// a promised-based library that makes server requests in React
+// It will ne used to fetch the data from Flickr
+import axios from 'axios';
+import '../style.css'
+import Search from './search';
+import InfiniteScroll from 'react-infinite-scroll-component';
+// import ImageSlideshow from 'material-ui/svg-icons/image/slideshow';
+
+// App components
+import ImageContainer from './ImageContainer';
+
+export default class GridGallery extends Component {
+    // Initialize State for data that is going to change
+    constructor() {
+        super();
+        this.state = {
+            // State is the 'photos' data we want to display
+            photos: [],
+            loading: true,
+            query: '',
+            page: 1,
+        };
     }
-};
 
-loadJSON(
-    "https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=e52a287d86469bf01ea901dfd92cf8a5&text=animal&media=photos&per_page=15&page=1&format=json&nojsoncallback=1"
-);
+    // componentDidMount is used to "fetch data from a server" with AJAX calls (axios will perform)
+    componentDidMount() {
+        this.newImages()
+    }
 
-function GridGallery() {
-    useEffect(() => {
-        let images = document.getElementsByTagName('img');
-        document.getElementById("Search").on("keyup", function () {
-            let search = document.getElementById('Search').val().toLowerCase();
-            for (var i = 0; i < images.length; i++) {
-                let value = images[i].getAttribute('data-alt');
-                if (value.toLocaleLowerCase().indexOf(search) > -1) {
-                    images[i].style.display = "";
-                }
-                else {
-                    images[i].style.display = "none";
-                }
-            }
+    newImages = (page = this.state.page) => {
+        // axios (get method) - uses Javascript Promises to handle results. Promises let you chain methods (callbacks) in a sequential order
+        axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=e52a287d86469bf01ea901dfd92cf8a5&text=${this.props.query}&media=photos&per_page=15&page=${page}&format=json&nojsoncallback=1`)
+            // Response object executed once results are obtained from Flickr
+            .then(response => {
+                console.log(response)
+                this.setState({
+                    photos: response.data.photos.photo,
+                    loading: false,
+                    query: ''
+                });
+            })
+            // catch method - handles any errors fetching data
+            .catch(error => {
+                console.log('Error fetching and parsing data', error);
+            });
+    }
+
+    getValues = () => {
+        this.setState({
+            page: (this.state.page) + 1
         });
-    }, []);
+        this.newImages()
+    }
 
-    return (
-        <div>
-            <div className="search">
-                <i className="fa fa-search searchIcon"></i>
-                <input
-                    type="text"
-                    className="searchInput"
-                    id="Search"
-                    placeholder="Search free high resolution photos"
-                />
+
+    render() {
+        console.log(this.state.photos);
+        return (
+            <div>
+                <Search />
+                <div className="photo-container">
+                    {
+                        (this.state.loading)
+                            ? <p>Loading...</p>
+                            : <InfiniteScroll dataLength={15} next={this.getValues} hasMore={true} className="gallery">
+                                <ImageContainer data={this.state.photos} />
+                            </InfiniteScroll>
+                    }
+                </div>
             </div>
-            <div id="gallery" className="App"></div>
-        </div>
-    );
+        );
+    }
 }
-
-export default GridGallery;
