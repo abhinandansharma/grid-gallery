@@ -51,7 +51,7 @@ export default class GridGallery extends Component {
 
     getValues = () => {
         this.setState({
-            page: (this.state.page) + 1
+            page: (this.state.page)++
         });
         this.newImages()
     }

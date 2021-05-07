@@ -4,6 +4,7 @@
   width: 70vw;
   margin: auto;
   margin-top: 15px;
+  overflow: hidden !important;
 }
   img {
     width: 100%;
