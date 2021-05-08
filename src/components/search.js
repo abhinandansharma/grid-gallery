@@ -49,7 +49,7 @@ export default class Search extends Component {
     componentDidMount() {
     }
 
-    performSearch = (text = '') => {
+    performSearch = (text) => {
         axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=e52a287d86469bf01ea901dfd92cf8a5&text=${text}&per_page=15&format=json&nojsoncallback=1`)
             // Response object executed once results are obtained from Flickr
             .then(response => {
