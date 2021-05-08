@@ -31,9 +31,9 @@ export default class GridGallery extends Component {
         this.newImages()
     }
 
-    newImages = (page = this.state.page) => {
+    newImages = () => {
         // axios (get method) - uses Javascript Promises to handle results. Promises let you chain methods (callbacks) in a sequential order
-        axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=e52a287d86469bf01ea901dfd92cf8a5&text=${this.props.query}&media=photos&per_page=15&page=${page}&format=json&nojsoncallback=1`)
+        axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=e52a287d86469bf01ea901dfd92cf8a5&text=${this.props.query}&media=photos&per_page=15&page=${this.state.page}&format=json&nojsoncallback=1`)
             // Response object executed once results are obtained from Flickr
             .then(response => {
                 console.log(response)
@@ -51,7 +51,7 @@ export default class GridGallery extends Component {
 
     getValues = () => {
         this.setState({
-            page: (this.state.page)++
+            page: (this.state.page) + 1
         });
         this.newImages()
     }

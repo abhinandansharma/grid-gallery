@@ -69,17 +69,18 @@ export default class Search extends Component {
     render() {
         return (
             <div>
-                <div className="search">
-                    <i className="fa fa-search searchIcon"></i>
-                    <input
-                        type="search"
-                        onChange={this.onSearchChange}
-                        className="searchInput"
-                        ref={(input) => this.query = input} // Puts a reference to the input on the Search form class
-                        id="Search"
-                        placeholder="Search free high resolution photos"
-                        onSubmit={this.handleSubmit}
-                    />
+                <div id="nav">
+                    <div className="search">
+                        <i className="fa fa-search searchIcon"></i>
+                        <input
+                            type="search"
+                            onChange={this.onSearchChange}
+                            className="searchInput"
+                            ref={(input) => this.query = input} // Puts a reference to the input on the Search form class
+                            id="Search"
+                            placeholder="Search free high resolution photos"
+                        />
+                    </div>
                 </div>
                 <div className="gallery">
                     {
